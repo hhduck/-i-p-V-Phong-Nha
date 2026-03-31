@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thám Tử Mạng: Điệp Vụ Phong Nha</title>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Lexend:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
-      --teal-900:  #0a4a4a;
-      --teal-700:  #0d7a6e;
-      --teal-500:  #14a899;
-      --teal-300:  #7ed8cf;
-      --teal-100:  #d6f5f2;
-      --teal-50:   #edfaf8;
-      --gold-700:  #9a6800;
-      --gold-500:  #c8920a;
-      --gold-300:  #f0c040;
-      --gold-100:  #fef3c7;
-      --red-500:   #e63946;
+      --teal-900: #0a4a4a;
+      --teal-700: #0d7a6e;
+      --teal-500: #14a899;
+      --teal-300: #7ed8cf;
+      --teal-100: #d6f5f2;
+      --teal-50: #edfaf8;
+      --gold-700: #9a6800;
+      --gold-500: #c8920a;
+      --gold-300: #f0c040;
+      --gold-100: #fef3c7;
+      --red-500: #e63946;
       --green-500: #2a9d5c;
-      --ink:       #1a2e2e;
-      --ink-mid:   #3d5c5c;
+      --ink: #1a2e2e;
+      --ink-mid: #3d5c5c;
       --ink-muted: #6b8f8f;
-      --surface:   #f4faf9;
+      --surface: #f4faf9;
       --surface-2: #e8f6f4;
-      --white:     #ffffff;
-      --shadow-sm: 0 2px 10px rgba(10,74,74,0.10);
-      --shadow-md: 0 6px 24px rgba(10,74,74,0.14);
-      --shadow-lg: 0 16px 50px rgba(10,74,74,0.18);
+      --white: #ffffff;
+      --shadow-sm: 0 2px 10px rgba(10, 74, 74, 0.10);
+      --shadow-md: 0 6px 24px rgba(10, 74, 74, 0.14);
+      --shadow-lg: 0 16px 50px rgba(10, 74, 74, 0.18);
     }
 
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      font-family:'Be Vietnam Pro', sans-serif;
+      font-family: 'Be Vietnam Pro', sans-serif;
       background: var(--surface);
       color: var(--ink);
       min-height: 100vh;
@@ -44,801 +56,1300 @@
 
     /* ── BACKGROUND ── */
     #bg-layer {
-      position:fixed; inset:0; z-index:0;
-      background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-      background-size:cover; background-position:center 40%;
-      filter:brightness(1) saturate(0.5) opacity(0.10);
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url('phongnha.png');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(1) saturate(0.5) opacity(0.10);
       transition: filter 1.8s, opacity 1.8s;
     }
-    #bg-layer.victory { filter:brightness(1) saturate(1.1) opacity(1); }
+
+    #bg-layer.victory {
+      filter: brightness(1) saturate(1.1) opacity(1);
+    }
 
     #bg-wash {
-      position:fixed; inset:0; z-index:1;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
       background: linear-gradient(165deg,
-        rgba(237,250,248,0.97) 0%,
-        rgba(214,245,242,0.94) 55%,
-        rgba(237,250,248,0.97) 100%);
-      transition:opacity 1.8s;
+          rgba(237, 250, 248, 0.97) 0%,
+          rgba(214, 245, 242, 0.94) 55%,
+          rgba(237, 250, 248, 0.97) 100%);
+      transition: opacity 1.8s;
     }
-    #bg-wash.victory { opacity:0; pointer-events:none; }
+
+    #bg-wash.victory {
+      opacity: 0;
+      pointer-events: none;
+    }
 
     /* ── APP ── */
-    #app { position:relative; z-index:10; min-height:100vh; }
+    #app {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+    }
 
     .screen {
-      display:none; min-height:100vh;
-      padding:36px 16px;
-      flex-direction:column; align-items:center;
+      display: none;
+      min-height: 100vh;
+      padding: 36px 16px;
+      flex-direction: column;
+      align-items: center;
     }
-    .screen.active { display:flex; }
 
-    .page-wrap { width:100%; max-width:880px; }
+    .screen.active {
+      display: flex;
+    }
+
+    .page-wrap {
+      width: 100%;
+      max-width: 880px;
+    }
 
     /* ── HEADER ── */
-    header { text-align:center; margin-bottom:40px; }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
 
     .status-pill {
-      display:inline-flex; align-items:center; gap:8px;
-      background:var(--teal-100); border:1.5px solid var(--teal-300);
-      color:var(--teal-700); font-size:11px; font-weight:700;
-      letter-spacing:2px; padding:5px 18px; border-radius:100px;
-      margin-bottom:20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal-100);
+      border: 1.5px solid var(--teal-300);
+      color: var(--teal-700);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 5px 18px;
+      border-radius: 100px;
+      margin-bottom: 20px;
     }
+
     .sdot {
-      width:7px; height:7px; border-radius:50%;
-      background:var(--green-500);
-      animation:sdot 1.4s ease-in-out infinite;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green-500);
+      animation: sdot 1.4s ease-in-out infinite;
     }
+
     @keyframes sdot {
-      0%,100%{box-shadow:0 0 0 0 rgba(42,157,92,.55)}
-      50%{box-shadow:0 0 0 5px rgba(42,157,92,0)}
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(42, 157, 92, .55)
+      }
+
+      50% {
+        box-shadow: 0 0 0 5px rgba(42, 157, 92, 0)
+      }
     }
 
     header h1 {
-      font-family:'Lexend', sans-serif;
-      font-size:clamp(26px,5.5vw,48px); font-weight:800;
-      color:var(--teal-900); line-height:1.15; letter-spacing:-0.5px;
+      font-family: 'Lexend', sans-serif;
+      font-size: clamp(26px, 5.5vw, 48px);
+      font-weight: 800;
+      color: var(--teal-900);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
     }
-    header h1 span { color:var(--teal-500); }
-    header p { margin-top:10px; font-size:14px; color:var(--ink-muted); font-weight:500; }
+
+    header h1 span {
+      color: var(--teal-500);
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
 
     .section-rule {
-      display:flex; align-items:center; gap:14px;
-      margin:28px 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 28px 0 24px;
     }
-    .section-rule::before,.section-rule::after {
-      content:''; flex:1; height:1.5px;
-      background:linear-gradient(90deg,transparent,var(--teal-300),transparent);
+
+    .section-rule::before,
+    .section-rule::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--teal-300), transparent);
     }
+
     .section-rule span {
-      font-size:10px; font-weight:700; color:var(--teal-500);
-      letter-spacing:3px; white-space:nowrap;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--teal-500);
+      letter-spacing: 3px;
+      white-space: nowrap;
     }
 
     /* ── CARDS ── */
     .cards-grid {
-      display:grid; grid-template-columns:repeat(3,1fr);
-      gap:16px; margin-bottom:28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
     }
-    @media(max-width:620px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:380px){.cards-grid{grid-template-columns:1fr}}
+
+    @media(max-width:620px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media(max-width:380px) {
+      .cards-grid {
+        grid-template-columns: 1fr
+      }
+    }
 
     .c-card {
-      background:var(--white);
-      border:1.5px solid var(--teal-100);
-      border-radius:18px; padding:28px 14px 20px;
-      display:flex; flex-direction:column; align-items:center; gap:10px;
-      cursor:pointer; position:relative;
-      transition:transform .28s, border-color .28s, box-shadow .28s;
-      box-shadow:var(--shadow-sm);
+      background: var(--white);
+      border: 1.5px solid var(--teal-100);
+      border-radius: 18px;
+      padding: 28px 14px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      position: relative;
+      transition: transform .28s, border-color .28s, box-shadow .28s;
+      box-shadow: var(--shadow-sm);
     }
+
     .c-card:not(.unlocked):hover {
-      transform:translateY(-7px) scale(1.025);
-      border-color:var(--teal-300);
-      box-shadow:var(--shadow-lg);
+      transform: translateY(-7px) scale(1.025);
+      border-color: var(--teal-300);
+      box-shadow: var(--shadow-lg);
     }
+
     .c-card.unlocked {
-      background:linear-gradient(145deg,#edfaf8,#f4fffe);
-      border-color:var(--teal-300); cursor:default;
-      box-shadow:0 4px 18px rgba(20,168,153,.15);
+      background: linear-gradient(145deg, #edfaf8, #f4fffe);
+      border-color: var(--teal-300);
+      cursor: default;
+      box-shadow: 0 4px 18px rgba(20, 168, 153, .15);
     }
+
     .c-icon {
-      width:64px; height:64px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      font-size:28px;
-      background:var(--teal-50); border:2px solid var(--teal-100);
-      transition:all .4s;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      background: var(--teal-50);
+      border: 2px solid var(--teal-100);
+      transition: all .4s;
     }
+
     .c-card.unlocked .c-icon {
-      background:var(--teal-100); border-color:var(--teal-300);
+      background: var(--teal-100);
+      border-color: var(--teal-300);
     }
-    .c-num { font-size:10px; font-weight:700; letter-spacing:3px; color:var(--ink-muted); }
-    .c-label { font-size:12px; font-weight:700; text-align:center; color:var(--ink-mid); }
-    .c-card.unlocked .c-label { color:var(--teal-700); }
+
+    .c-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--ink-muted);
+    }
+
+    .c-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--ink-mid);
+    }
+
+    .c-card.unlocked .c-label {
+      color: var(--teal-700);
+    }
+
     .c-dot {
-      position:absolute; top:12px; right:13px;
-      width:9px; height:9px; border-radius:50%;
+      position: absolute;
+      top: 12px;
+      right: 13px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
     }
-    .c-dot.red  { background:var(--red-500); animation:blink 1.3s ease infinite; }
-    .c-dot.green{ background:var(--green-500); box-shadow:0 0 0 2px rgba(42,157,92,.22); }
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+    .c-dot.red {
+      background: var(--red-500);
+      animation: blink 1.3s ease infinite;
+    }
+
+    .c-dot.green {
+      background: var(--green-500);
+      box-shadow: 0 0 0 2px rgba(42, 157, 92, .22);
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .25
+      }
+    }
 
     /* ── FRAGMENT BAR ── */
     .frag-section {
-      background:var(--white); border:1.5px solid var(--teal-100);
-      border-radius:18px; padding:24px 20px; box-shadow:var(--shadow-sm);
+      background: var(--white);
+      border: 1.5px solid var(--teal-100);
+      border-radius: 18px;
+      padding: 24px 20px;
+      box-shadow: var(--shadow-sm);
     }
-    .frag-title {
-      font-size:10px; font-weight:700; letter-spacing:3px;
-      color:var(--ink-muted); text-align:center;
-      margin-bottom:18px; text-transform:uppercase;
-    }
-    .frags-row { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
 
-    .flip-wrap { perspective:700px; width:118px; height:44px; }
+    .frag-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--ink-muted);
+      text-align: center;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .frags-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .flip-wrap {
+      perspective: 700px;
+      width: 118px;
+      height: 44px;
+    }
+
     .flip-inner {
-      position:relative; width:100%; height:100%;
-      transform-style:preserve-3d;
-      transition:transform .7s cubic-bezier(.4,0,.2,1);
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform .7s cubic-bezier(.4, 0, .2, 1);
     }
-    .flip-wrap.revealed .flip-inner { transform:rotateY(180deg); }
-    .flip-front, .flip-back {
-      position:absolute; inset:0; backface-visibility:hidden;
-      border-radius:8px;
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Lexend', sans-serif; font-weight:700;
-      font-size:10px; letter-spacing:2px;
+
+    .flip-wrap.revealed .flip-inner {
+      transform: rotateY(180deg);
     }
-    .flip-front {
-      background:var(--surface-2); border:1.5px dashed var(--teal-300);
-      color:var(--teal-300);
-    }
+
+    .flip-front,
     .flip-back {
-      background:linear-gradient(135deg,var(--gold-100),#fff9e6);
-      border:1.5px solid var(--gold-300); color:var(--gold-700);
-      font-size:9px; padding:0 8px; text-align:center;
-      transform:rotateY(180deg);
-      box-shadow:0 2px 10px rgba(200,146,10,.2);
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lexend', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .flip-front {
+      background: var(--surface-2);
+      border: 1.5px dashed var(--teal-300);
+      color: var(--teal-300);
+    }
+
+    .flip-back {
+      background: linear-gradient(135deg, var(--gold-100), #fff9e6);
+      border: 1.5px solid var(--gold-300);
+      color: var(--gold-700);
+      font-size: 9px;
+      padding: 0 8px;
+      text-align: center;
+      transform: rotateY(180deg);
+      box-shadow: 0 2px 10px rgba(200, 146, 10, .2);
     }
 
     /* ── MODAL ── */
     .modal-overlay {
-      position:fixed; inset:0; z-index:100;
-      background:rgba(10,74,74,.28); backdrop-filter:blur(8px);
-      display:flex; align-items:center; justify-content:center;
-      padding:20px; opacity:0; pointer-events:none;
-      transition:opacity .3s;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(10, 74, 74, .28);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
     }
-    .modal-overlay.open { opacity:1; pointer-events:all; }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
 
     .modal-box {
-      background:var(--white);
-      border:1.5px solid var(--teal-100);
-      border-radius:22px; padding:36px;
-      max-width:700px; width:100%;
-      box-shadow:var(--shadow-lg); position:relative;
-      transition:box-shadow .2s, border-color .2s;
+      background: var(--white);
+      border: 1.5px solid var(--teal-100);
+      border-radius: 22px;
+      padding: 36px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      transition: box-shadow .2s, border-color .2s;
     }
+
     .modal-overlay.open .modal-box {
-      animation:slideUp .36s cubic-bezier(.34,1.56,.64,1) both;
+      animation: slideUp .36s cubic-bezier(.34, 1.56, .64, 1) both;
     }
+
     @keyframes slideUp {
-      from{transform:translateY(32px) scale(.95);opacity:0}
-      to{transform:translateY(0) scale(1);opacity:1}
+      from {
+        transform: translateY(32px) scale(.95);
+        opacity: 0
+      }
+
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1
+      }
     }
+
     .modal-box.shake {
-      animation:shake .48s ease !important;
-      border-color:var(--red-500) !important;
-      box-shadow:0 0 0 3px rgba(230,57,70,.15),var(--shadow-md) !important;
+      animation: shake .48s ease !important;
+      border-color: var(--red-500) !important;
+      box-shadow: 0 0 0 3px rgba(230, 57, 70, .15), var(--shadow-md) !important;
     }
+
     @keyframes shake {
-      0%,100%{transform:translateX(0)}
-      15%{transform:translateX(-9px)} 35%{transform:translateX(9px)}
-      55%{transform:translateX(-6px)} 75%{transform:translateX(6px)}
-      90%{transform:translateX(-2px)}
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      15% {
+        transform: translateX(-9px)
+      }
+
+      35% {
+        transform: translateX(9px)
+      }
+
+      55% {
+        transform: translateX(-6px)
+      }
+
+      75% {
+        transform: translateX(6px)
+      }
+
+      90% {
+        transform: translateX(-2px)
+      }
     }
 
     /* ── QUESTION ── */
     .q-header {
-      display:flex; align-items:flex-start;
-      justify-content:space-between; gap:14px; margin-bottom:20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 20px;
     }
+
     .q-title {
-      font-family:'Lexend', sans-serif; font-weight:700;
-      font-size:clamp(14px,2.5vw,17px);
-      color:var(--teal-700); line-height:1.35; flex:1;
+      font-family: 'Lexend', sans-serif;
+      font-weight: 700;
+      font-size: clamp(14px, 2.5vw, 17px);
+      color: var(--teal-700);
+      line-height: 1.35;
+      flex: 1;
     }
+
     .q-close-btn {
-      background:none; border:1.5px solid #ddd;
-      color:var(--ink-muted); border-radius:8px;
-      font-family:'Be Vietnam Pro', sans-serif;
-      font-size:12px; font-weight:600; cursor:pointer;
-      padding:7px 14px; white-space:nowrap; flex-shrink:0;
-      transition:all .2s;
+      background: none;
+      border: 1.5px solid #ddd;
+      color: var(--ink-muted);
+      border-radius: 8px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 7px 14px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all .2s;
     }
+
     .q-close-btn:hover {
-      border-color:var(--red-500); color:var(--red-500);
-      background:rgba(230,57,70,.06);
+      border-color: var(--red-500);
+      color: var(--red-500);
+      background: rgba(230, 57, 70, .06);
     }
 
     .situation-box {
-      background:var(--teal-50); border-left:4px solid var(--teal-500);
-      border-radius:0 12px 12px 0; padding:14px 18px;
-      margin-bottom:22px;
-      display:flex; gap:12px; align-items:flex-start;
-      font-size:14px; color:var(--ink-mid); line-height:1.65;
+      background: var(--teal-50);
+      border-left: 4px solid var(--teal-500);
+      border-radius: 0 12px 12px 0;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.65;
     }
-    .sit-icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+
+    .sit-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
 
     .q-question {
-      font-size:clamp(14px,2.3vw,16px); font-weight:600;
-      color:var(--ink); line-height:1.6; margin-bottom:20px;
+      font-size: clamp(14px, 2.3vw, 16px);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
 
-    .answers { display:flex; flex-direction:column; gap:10px; }
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .ans-btn {
-      background:var(--surface); border:1.5px solid #dde8e7;
-      border-radius:12px; padding:14px 18px;
-      color:var(--ink-mid); cursor:pointer; text-align:left;
-      font-family:'Be Vietnam Pro', sans-serif;
-      font-size:14px; font-weight:500; line-height:1.45;
-      transition:all .2s; position:relative; overflow:hidden;
+      background: var(--surface);
+      border: 1.5px solid #dde8e7;
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: var(--ink-mid);
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.45;
+      transition: all .2s;
+      position: relative;
+      overflow: hidden;
     }
+
     .ans-btn::before {
-      content:''; position:absolute; left:0; top:0; bottom:0;
-      width:4px; background:var(--teal-500);
-      border-radius:4px 0 0 4px; opacity:0; transition:opacity .2s;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--teal-500);
+      border-radius: 4px 0 0 4px;
+      opacity: 0;
+      transition: opacity .2s;
     }
+
     .ans-btn:hover {
-      background:var(--teal-50); border-color:var(--teal-300);
-      color:var(--teal-900); transform:translateX(4px);
-      box-shadow:var(--shadow-sm);
+      background: var(--teal-50);
+      border-color: var(--teal-300);
+      color: var(--teal-900);
+      transform: translateX(4px);
+      box-shadow: var(--shadow-sm);
     }
-    .ans-btn:hover::before { opacity:1; }
+
+    .ans-btn:hover::before {
+      opacity: 1;
+    }
+
     .ans-btn.correct {
-      background:#edfaf4 !important; border-color:var(--green-500) !important;
-      color:var(--green-500) !important; font-weight:700 !important;
+      background: #edfaf4 !important;
+      border-color: var(--green-500) !important;
+      color: var(--green-500) !important;
+      font-weight: 700 !important;
     }
+
     .ans-btn.wrong {
-      background:#fff0f0 !important; border-color:var(--red-500) !important;
-      color:var(--red-500) !important;
+      background: #fff0f0 !important;
+      border-color: var(--red-500) !important;
+      color: var(--red-500) !important;
     }
 
     .error-msg {
-      text-align:center; font-size:12px; font-weight:700;
-      letter-spacing:1px; color:var(--red-500);
-      margin-top:14px; height:18px; opacity:0; transition:opacity .2s;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--red-500);
+      margin-top: 14px;
+      height: 18px;
+      opacity: 0;
+      transition: opacity .2s;
     }
-    .error-msg.show { opacity:1; }
+
+    .error-msg.show {
+      opacity: 1;
+    }
 
     /* ── EXPLANATION ── */
-    .exp-box { text-align:center; }
+    .exp-box {
+      text-align: center;
+    }
+
     .exp-icon {
-      font-size:56px; display:inline-block; margin-bottom:10px;
-      animation:popIn .55s cubic-bezier(.34,1.56,.64,1);
+      font-size: 56px;
+      display: inline-block;
+      margin-bottom: 10px;
+      animation: popIn .55s cubic-bezier(.34, 1.56, .64, 1);
     }
+
     @keyframes popIn {
-      from{transform:scale(0) rotate(-20deg);opacity:0}
-      to{transform:scale(1) rotate(0);opacity:1}
+      from {
+        transform: scale(0) rotate(-20deg);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1) rotate(0);
+        opacity: 1
+      }
     }
+
     .exp-title {
-      font-family:'Lexend', sans-serif;
-      font-size:clamp(18px,4vw,24px); font-weight:800;
-      color:var(--teal-700); margin-bottom:18px; letter-spacing:.5px;
+      font-family: 'Lexend', sans-serif;
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 800;
+      color: var(--teal-700);
+      margin-bottom: 18px;
+      letter-spacing: .5px;
     }
+
     .exp-body {
-      background:var(--teal-50); border:1.5px solid var(--teal-100);
-      border-radius:12px; padding:18px 20px;
-      font-size:14px; line-height:1.75;
-      color:var(--ink-mid); text-align:left; margin-bottom:20px;
+      background: var(--teal-50);
+      border: 1.5px solid var(--teal-100);
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--ink-mid);
+      text-align: left;
+      margin-bottom: 20px;
     }
+
     .exp-body code {
-      background:var(--teal-100); color:var(--teal-700);
-      padding:2px 7px; border-radius:4px;
-      font-family:'Courier New', monospace; font-size:13px; font-weight:700;
+      background: var(--teal-100);
+      color: var(--teal-700);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      font-weight: 700;
     }
+
     .frag-badge {
-      display:inline-block; background:var(--gold-100);
-      border:2px solid var(--gold-300); border-radius:14px;
-      padding:14px 36px; margin-bottom:22px;
+      display: inline-block;
+      background: var(--gold-100);
+      border: 2px solid var(--gold-300);
+      border-radius: 14px;
+      padding: 14px 36px;
+      margin-bottom: 22px;
     }
+
     .frag-label {
-      font-size:10px; font-weight:700; letter-spacing:3px;
-      color:var(--gold-500); text-transform:uppercase; margin-bottom:6px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--gold-500);
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
+
     .frag-word {
-      font-family:'Lexend', sans-serif;
-      font-size:clamp(18px,4vw,26px); font-weight:800;
-      color:var(--gold-700); letter-spacing:3px;
+      font-family: 'Lexend', sans-serif;
+      font-size: clamp(18px, 4vw, 26px);
+      font-weight: 800;
+      color: var(--gold-700);
+      letter-spacing: 3px;
     }
+
     .continue-btn {
-      background:var(--teal-500); border:none; color:var(--white);
-      border-radius:12px;
-      font-family:'Be Vietnam Pro', sans-serif;
-      font-size:14px; font-weight:700;
-      padding:14px 44px; cursor:pointer; letter-spacing:1px;
-      transition:all .3s;
-      box-shadow:0 4px 16px rgba(20,168,153,.30);
+      background: var(--teal-500);
+      border: none;
+      color: var(--white);
+      border-radius: 12px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 14px 44px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all .3s;
+      box-shadow: 0 4px 16px rgba(20, 168, 153, .30);
     }
+
     .continue-btn:hover {
-      background:var(--teal-700);
-      transform:translateY(-2px);
-      box-shadow:0 8px 24px rgba(20,168,153,.35);
+      background: var(--teal-700);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(20, 168, 153, .35);
     }
 
     /* ── VICTORY ── */
-    #screen-victory { padding:40px 16px; justify-content:center; }
+    #screen-victory {
+      padding: 16px 16px 24px;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      height: 100vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
 
-    .v-frags-row {
-      display:flex; flex-wrap:wrap;
-      justify-content:center; gap:8px; margin-bottom:32px;
+    /* Banner câu hoàn chỉnh */
+    .v-banner {
+      width: 100%;
+      max-width: 760px;
+      text-align: center;
+      margin-bottom: 18px;
+      animation: chipIn .6s cubic-bezier(.34, 1.56, .64, 1) .1s both;
     }
-    .v-chip {
-      background:var(--gold-100); border:1.5px solid var(--gold-300);
-      border-radius:8px; padding:7px 16px;
-      font-family:'Lexend', sans-serif; font-size:11px; font-weight:800;
-      color:var(--gold-700); letter-spacing:1.5px;
-      animation:chipIn .5s cubic-bezier(.34,1.56,.64,1) both;
+
+    .v-banner-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--gold-500);
+      text-transform: uppercase;
+      margin-bottom: 8px;
     }
-    .v-chip:nth-child(1){animation-delay:.1s}
-    .v-chip:nth-child(2){animation-delay:.22s}
-    .v-chip:nth-child(3){animation-delay:.34s}
-    .v-chip:nth-child(4){animation-delay:.46s}
-    .v-chip:nth-child(5){animation-delay:.58s}
+
+    .v-banner-phrase {
+      font-family: 'Lexend', sans-serif;
+      font-size: clamp(17px, 3.8vw, 30px);
+      font-weight: 800;
+      color: var(--gold-700);
+      letter-spacing: 2px;
+      background: var(--gold-100);
+      border: 2px solid var(--gold-300);
+      border-radius: 14px;
+      padding: 14px 28px;
+      display: inline-block;
+      box-shadow: 0 4px 18px rgba(200, 146, 10, .18);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+    }
+
     @keyframes chipIn {
-      from{transform:scale(.5) translateY(20px);opacity:0}
-      to{transform:scale(1) translateY(0);opacity:1}
+      from {
+        transform: scale(.5) translateY(20px);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1
+      }
     }
 
     /* CERTIFICATE */
     .cert {
-      max-width:760px; width:100%;
-      border-radius:22px; overflow:hidden;
-      border:3px solid var(--gold-300);
+      max-width: 720px;
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 3px solid var(--gold-300);
       box-shadow:
-        0 0 0 6px var(--gold-100),
-        0 0 0 9px var(--gold-300),
-        0 30px 70px rgba(0,0,0,.22);
-      animation:certIn .8s cubic-bezier(.34,1.2,.64,1) .6s both;
-      position:relative;
+        0 0 0 5px var(--gold-100),
+        0 0 0 8px var(--gold-300),
+        0 20px 50px rgba(0, 0, 0, .22);
+      animation: certIn .8s cubic-bezier(.34, 1.2, .64, 1) .6s both;
+      position: relative;
+      flex-shrink: 0;
     }
+
     @keyframes certIn {
-      from{transform:scale(.88) translateY(28px);opacity:0}
-      to{transform:scale(1) translateY(0);opacity:1}
+      from {
+        transform: scale(.88) translateY(28px);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1
+      }
     }
 
     /* Corner ornaments sit on top of everything */
     .cert-orn {
-      position:absolute; width:30px; height:30px;
-      border-color:rgba(240,192,64,.8); border-style:solid; z-index:5;
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-color: rgba(240, 192, 64, .8);
+      border-style: solid;
+      z-index: 5;
     }
-    .cert-orn-tl { top:10px; left:10px;  border-width:2.5px 0 0 2.5px; }
-    .cert-orn-tr { top:10px; right:10px; border-width:2.5px 2.5px 0 0; }
-    .cert-orn-bl { bottom:10px; left:10px;  border-width:0 0 2.5px 2.5px; }
-    .cert-orn-br { bottom:10px; right:10px; border-width:0 2.5px 2.5px 0; }
+
+    .cert-orn-tl {
+      top: 10px;
+      left: 10px;
+      border-width: 2.5px 0 0 2.5px;
+    }
+
+    .cert-orn-tr {
+      top: 10px;
+      right: 10px;
+      border-width: 2.5px 2.5px 0 0;
+    }
+
+    .cert-orn-bl {
+      bottom: 10px;
+      left: 10px;
+      border-width: 0 0 2.5px 2.5px;
+    }
+
+    .cert-orn-br {
+      bottom: 10px;
+      right: 10px;
+      border-width: 0 2.5px 2.5px 0;
+    }
 
     /* Photo band */
     .cert-photo {
-      width:100%; height:210px;
-      position:relative; overflow:hidden; flex-shrink:0;
+      width: 100%;
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
     }
+
     .cert-photo img {
-      width:100%; height:100%;
-      object-fit:cover; object-position:center 55%;
-      display:block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
     }
+
     /* Gradient fade at bottom so it merges into body */
     .cert-photo::after {
-      content:''; position:absolute; inset:0;
-      background:linear-gradient(
-        to bottom,
-        rgba(254,243,199,0)   0%,
-        rgba(254,243,199,0)   45%,
-        rgba(254,243,199,.88) 85%,
-        rgba(254,243,199,1)   100%
-      );
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+          rgba(254, 243, 199, 0) 0%,
+          rgba(254, 243, 199, 0) 45%,
+          rgba(254, 243, 199, .88) 85%,
+          rgba(254, 243, 199, 1) 100%);
     }
 
     /* Medal floats on photo */
     .cert-medal-wrap {
-      position:absolute; bottom:-32px; left:50%;
-      transform:translateX(-50%); z-index:3;
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
     }
+
     .cert-medal-circle {
-      width:72px; height:72px; border-radius:50%;
-      background:linear-gradient(145deg, var(--gold-300), var(--gold-700));
-      border:4px solid var(--white);
-      box-shadow:0 6px 24px rgba(200,146,10,.45);
-      display:flex; align-items:center; justify-content:center;
-      font-size:34px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--gold-300), var(--gold-700));
+      border: 4px solid var(--white);
+      box-shadow: 0 6px 24px rgba(200, 146, 10, .45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
     }
 
     /* Body below photo */
     .cert-body {
-      background:var(--gold-100);
-      padding:60px 48px 40px; text-align:center;
+      background: var(--gold-100);
+      padding: 48px 40px 28px;
+      text-align: center;
     }
-    @media(max-width:520px){
-      .cert-body{padding:56px 22px 32px}
-      .cert-photo{height:160px}
+
+    @media(max-width:520px) {
+      .cert-body {
+        padding: 44px 18px 24px
+      }
+
+      .cert-photo {
+        height: 140px
+      }
     }
 
     .cert-eyebrow {
-      font-size:10px; font-weight:700; letter-spacing:4px;
-      color:var(--gold-500); text-transform:uppercase; margin-bottom:10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--gold-500);
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
+
     .cert-h1 {
-      font-family:'Lexend', sans-serif;
-      font-size:clamp(24px,5vw,40px); font-weight:800;
-      color:var(--gold-700); line-height:1.15; margin-bottom:8px;
+      font-family: 'Lexend', sans-serif;
+      font-size: clamp(24px, 5vw, 40px);
+      font-weight: 800;
+      color: var(--gold-700);
+      line-height: 1.15;
+      margin-bottom: 8px;
     }
+
     .cert-h2 {
-      font-family:'Be Vietnam Pro', sans-serif;
-      font-size:clamp(15px,2.8vw,22px); font-weight:700;
-      color:var(--teal-700); letter-spacing:1px; margin-bottom:22px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: clamp(15px, 2.8vw, 22px);
+      font-weight: 700;
+      color: var(--teal-700);
+      letter-spacing: 1px;
+      margin-bottom: 22px;
     }
+
     .cert-divider {
-      height:1.5px; margin:20px auto; width:80%;
-      background:linear-gradient(90deg,transparent,var(--gold-300),transparent);
+      height: 1.5px;
+      margin: 20px auto;
+      width: 80%;
+      background: linear-gradient(90deg, transparent, var(--gold-300), transparent);
     }
+
     .cert-desc {
-      font-size:14px; line-height:1.75; color:var(--ink-mid); margin-bottom:22px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--ink-mid);
+      margin-bottom: 22px;
     }
 
     .cert-skills {
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:10px; text-align:left;
-      background:rgba(255,255,255,.72);
-      border:1.5px solid var(--gold-300);
-      border-radius:12px; padding:18px 20px; margin-bottom:24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      text-align: left;
+      background: rgba(255, 255, 255, .72);
+      border: 1.5px solid var(--gold-300);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
     }
-    @media(max-width:480px){.cert-skills{grid-template-columns:1fr}}
+
+    @media(max-width:480px) {
+      .cert-skills {
+        grid-template-columns: 1fr
+      }
+    }
 
     .skill-row {
-      display:flex; align-items:center; gap:9px;
-      font-size:13px; font-weight:500; color:var(--ink-mid);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-mid);
     }
-    .ck { color:var(--green-500); font-size:16px; }
-    .skill-row strong { color:var(--teal-700); font-weight:700; }
+
+    .ck {
+      color: var(--green-500);
+      font-size: 16px;
+    }
+
+    .skill-row strong {
+      color: var(--teal-700);
+      font-weight: 700;
+    }
 
     .cert-stamp {
-      display:inline-block;
-      font-size:10px; font-weight:700; letter-spacing:3px;
-      color:var(--teal-700); text-transform:uppercase;
-      background:rgba(20,168,153,.1);
-      border:1.5px solid var(--teal-300);
-      border-radius:8px; padding:9px 22px;
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--teal-700);
+      text-transform: uppercase;
+      background: rgba(20, 168, 153, .1);
+      border: 1.5px solid var(--teal-300);
+      border-radius: 8px;
+      padding: 9px 22px;
     }
 
     .reset-btn {
-      margin-top:28px; display:flex; align-items:center; gap:10px;
-      background:var(--white); border:1.5px solid var(--teal-300);
-      border-radius:12px; padding:13px 32px;
-      font-family:'Be Vietnam Pro', sans-serif;
-      font-size:14px; font-weight:700; color:var(--teal-700);
-      cursor:pointer; letter-spacing:.5px;
-      transition:all .3s; box-shadow:var(--shadow-sm);
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      border: 1.5px solid var(--teal-300);
+      border-radius: 12px;
+      padding: 13px 32px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--teal-700);
+      cursor: pointer;
+      letter-spacing: .5px;
+      transition: all .3s;
+      box-shadow: var(--shadow-sm);
     }
+
     .reset-btn:hover {
-      background:var(--teal-50); border-color:var(--teal-500);
-      transform:translateY(-2px); box-shadow:var(--shadow-md);
+      background: var(--teal-50);
+      border-color: var(--teal-500);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     /* ── CONFETTI ── */
-    #confetti-canvas { position:fixed; inset:0; z-index:200; pointer-events:none; }
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      pointer-events: none;
+    }
   </style>
 </head>
+
 <body>
 
-<div id="bg-layer"></div>
-<div id="bg-wash"></div>
-<canvas id="confetti-canvas"></canvas>
+  <div id="bg-layer"></div>
+  <div id="bg-wash"></div>
+  <canvas id="confetti-canvas"></canvas>
 
-<div id="app">
+  <div id="app">
 
-  <!-- HOME -->
-  <div id="screen-home" class="screen active">
-    <div class="page-wrap">
+    <!-- HOME -->
+    <div id="screen-home" class="screen active">
+      <div class="page-wrap">
 
-      <header>
-        <div class="status-pill"><span class="sdot"></span>ĐIỆP VỤ ĐANG TIẾN HÀNH</div>
-        <h1>Thám Tử Mạng<br><span>Điệp Vụ Phong Nha</span></h1>
-        <p>Giải mã 5 thư mục mật để hoàn thành nhiệm vụ</p>
-      </header>
+        <header>
+          <div class="status-pill"><span class="sdot"></span>ĐIỆP VỤ ĐANG TIẾN HÀNH</div>
+          <h1>Thám Tử Mạng<br><span>Điệp Vụ Phong Nha</span></h1>
+          <p>Giải mã 5 thư mục mật để hoàn thành nhiệm vụ</p>
+        </header>
 
-      <div class="section-rule"><span>CHỌN THƯ MỤC ĐỂ BẮT ĐẦU</span></div>
+        <div class="section-rule"><span>CHỌN THƯ MỤC ĐỂ BẮT ĐẦU</span></div>
 
-      <div class="cards-grid" id="cards-grid"></div>
+        <div class="cards-grid" id="cards-grid"></div>
 
-      <div class="frag-section">
-        <p class="frag-title">Bản đồ mật mã đang giải</p>
-        <div class="frags-row" id="frags-row"></div>
+        <div class="frag-section">
+          <p class="frag-title">Bản đồ mật mã đang giải</p>
+          <div class="frags-row" id="frags-row"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VICTORY -->
+    <div id="screen-victory" class="screen">
+      <div class="v-banner">
+        <div class="v-banner-label">🏆 Mật mã hoàn chỉnh</div>
+        <div class="v-banner-phrase" id="v-frags">CHINH PHỤC THÀNH CÔNG KỲ QUAN PHONG NHA KẺ BÀNG!</div>
       </div>
 
-    </div>
-  </div>
+      <div class="cert">
+        <!-- Corner ornaments -->
+        <div class="cert-orn cert-orn-tl"></div>
+        <div class="cert-orn cert-orn-tr"></div>
+        <div class="cert-orn cert-orn-bl"></div>
+        <div class="cert-orn cert-orn-br"></div>
 
-  <!-- VICTORY -->
-  <div id="screen-victory" class="screen">
-    <div class="v-frags-row" id="v-frags"></div>
+        <!-- Photo band with medal -->
+        <div class="cert-photo">
+          <img src="phongnha.png" alt="Phong Nha Kẻ Bàng">
+          <div class="cert-medal-wrap">
+            <div class="cert-medal-circle">🏆</div>
+          </div>
+        </div>
 
-    <div class="cert">
-      <!-- Corner ornaments -->
-      <div class="cert-orn cert-orn-tl"></div>
-      <div class="cert-orn cert-orn-tr"></div>
-      <div class="cert-orn cert-orn-bl"></div>
-      <div class="cert-orn cert-orn-br"></div>
-
-      <!-- Photo band with medal -->
-      <div class="cert-photo">
-        <img
-          src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85"
-          alt="Phong Nha Kẻ Bàng">
-        <div class="cert-medal-wrap">
-          <div class="cert-medal-circle">🏆</div>
+        <!-- Certificate body -->
+        <div class="cert-body">
+          <p class="cert-eyebrow">Hoàn tất nhiệm vụ · Điệp vụ Phong Nha</p>
+          <h2 class="cert-h1">Giấy Chứng Nhận</h2>
+          <p class="cert-h2">Người Dẫn Tour Chuyên Nghiệp</p>
+          <div class="cert-divider"></div>
+          <p class="cert-desc">
+            Chúc mừng! Bạn đã xuất sắc hoàn thành Điệp Vụ Phong Nha – Kẻ Bàng
+            và nắm vững đầy đủ các kỹ năng tìm kiếm thông tin trên mạng.
+          </p>
+          <div class="cert-skills">
+            <div class="skill-row"><span class="ck">✔</span>Tìm chính xác với <strong>&nbsp;""</strong></div>
+            <div class="skill-row"><span class="ck">✔</span>Loại từ khóa với <strong>&nbsp;-</strong></div>
+            <div class="skill-row"><span class="ck">✔</span>Lọc định dạng <strong>&nbsp;filetype:</strong></div>
+            <div class="skill-row"><span class="ck">✔</span>Tìm bằng <strong>&nbsp;Giọng nói</strong></div>
+            <div class="skill-row"><span class="ck">✔</span>Nhận diện <strong>&nbsp;.gov.vn / .edu.vn</strong></div>
+          </div>
+          <div class="cert-divider"></div>
+          <span class="cert-stamp">◆ Vườn Quốc Gia Phong Nha – Kẻ Bàng ◆</span>
         </div>
       </div>
 
-      <!-- Certificate body -->
-      <div class="cert-body">
-        <p class="cert-eyebrow">Hoàn tất nhiệm vụ · Điệp vụ Phong Nha</p>
-        <h2 class="cert-h1">Giấy Chứng Nhận</h2>
-        <p class="cert-h2">Người Dẫn Tour Chuyên Nghiệp</p>
-        <div class="cert-divider"></div>
-        <p class="cert-desc">
-          Chúc mừng! Bạn đã xuất sắc hoàn thành Điệp Vụ Phong Nha – Kẻ Bàng
-          và nắm vững đầy đủ các kỹ năng tìm kiếm thông tin trên mạng.
-        </p>
-        <div class="cert-skills">
-          <div class="skill-row"><span class="ck">✔</span>Tìm chính xác với <strong>&nbsp;""</strong></div>
-          <div class="skill-row"><span class="ck">✔</span>Loại từ khóa với <strong>&nbsp;-</strong></div>
-          <div class="skill-row"><span class="ck">✔</span>Lọc định dạng <strong>&nbsp;filetype:</strong></div>
-          <div class="skill-row"><span class="ck">✔</span>Tìm bằng <strong>&nbsp;Giọng nói</strong></div>
-          <div class="skill-row"><span class="ck">✔</span>Nhận diện <strong>&nbsp;.gov.vn / .edu.vn</strong></div>
-        </div>
-        <div class="cert-divider"></div>
-        <span class="cert-stamp">◆ Vườn Quốc Gia Phong Nha – Kẻ Bàng ◆</span>
+      <button class="reset-btn" id="reset-btn">↻ &nbsp;Nhận nhiệm vụ mới</button>
+    </div>
+
+  </div>
+
+  <!-- QUESTION MODAL -->
+  <div class="modal-overlay" id="q-modal">
+    <div class="modal-box" id="q-box">
+      <div class="q-header">
+        <div class="q-title" id="q-title"></div>
+        <button class="q-close-btn" id="q-close">✕ Hủy</button>
+      </div>
+      <div class="situation-box">
+        <span class="sit-icon">⚠️</span>
+        <span id="q-situation"></span>
+      </div>
+      <div class="q-question" id="q-question"></div>
+      <div class="answers" id="q-answers"></div>
+      <div class="error-msg" id="q-error">⚠ Đáp án sai — Hãy thử lại!</div>
+    </div>
+  </div>
+
+  <!-- EXPLANATION MODAL -->
+  <div class="modal-overlay" id="exp-modal">
+    <div class="modal-box">
+      <div class="exp-box">
+        <div class="exp-icon">✅</div>
+        <div class="exp-title">Truy cập thành công!</div>
+        <div class="exp-body" id="exp-body"></div>
+        <div class="frag-badge">
+          <div class="frag-label">Mảnh ghép mật mã thu được</div>
+          <div class="frag-word" id="exp-frag"></div>
+        </div><br>
+        <button class="continue-btn" id="continue-btn">Tiếp tục nhiệm vụ ▶</button>
       </div>
     </div>
-
-    <button class="reset-btn" id="reset-btn">↻ &nbsp;Nhận nhiệm vụ mới</button>
   </div>
 
-</div>
+  <script>
+    /* DATA */
+    const CHALLENGES = [
+      {
+        id: 1, title: "THỬ THÁCH 1: BỨC THƯ TAY BÍ ẨN",
+        situation: "Mật mã đầu tiên được giấu trong nguyên tác câu thơ khuyết của bài 'Màu tím hoa sim'. Bọn tin tặc đã tung ra hàng ngàn lời bài hát remix và video chế tác để làm nhiễu thông tin.",
+        question: "Để bộ máy tìm kiếm chỉ hiển thị kết quả có chứa CHÍNH XÁC cụm từ 'Chiều hành quân qua những đồi hoa sim', em sẽ nhập từ khóa với cú pháp nào?",
+        options: ['A. Chiều hành quân "qua những đồi" hoa sim', 'B. "Chiều hành quân qua những đồi hoa sim"', 'C. Chiều hành quân qua những đồi hoa sim ""', 'D. ""Chiều hành quân qua những đồi hoa sim""'],
+        correct: 1,
+        explanation: 'Mã khóa đã mở! Để tìm kiếm chính xác một cụm từ, điệp viên phải đặt toàn bộ cụm từ vào bên trong một cặp dấu ngoặc kép <code>""</code>. Các cách đặt ngoặc kép sai vị trí hoặc thừa dấu đều khiến thuật toán hiểu sai lệnh.',
+        fragment: "CHINH PHỤC"
+      },
+      {
+        id: 2, title: "THỬ THÁCH 2: CẠM BẪY QUẢNG CÁO",
+        situation: "Thám tử đang tìm đường vào Hang Sơn Đoòng. Tuy nhiên, thuật toán chặn đường bằng hàng loạt trang web bán tour du lịch ảo và quảng cáo môi giới.",
+        question: "Để loại bỏ hoàn toàn các trang web chứa từ 'tour' và 'quảng cáo' khỏi kết quả tìm kiếm về Hang Sơn Đoòng, cú pháp nào sau đây là chuẩn xác nhất?",
+        options: ['A. Hang Sơn Đoòng -tour -quảng cáo', 'B. Hang Sơn Đoòng - tour - quảng cáo', 'C. Hang Sơn Đoòng-tour-quảng cáo', 'D. Hang Sơn Đoòng "-tour" "-quảng cáo"'],
+        correct: 0,
+        explanation: 'Vượt bẫy thành công! Quy tắc sống còn: Phải có một dấu cách trước dấu trừ, và không có khoảng trắng sau dấu trừ — ví dụ: <code> -tour</code>.',
+        fragment: "THÀNH CÔNG"
+      },
+      {
+        id: 3, title: "THỬ THÁCH 3: HỒ SƠ MẬT",
+        situation: "Cửa an ninh số 3 yêu cầu thám tử tải lên một tệp tài liệu nghiên cứu về hệ sinh thái Phong Nha. Tệp này bắt buộc ở định dạng PDF.",
+        question: "Em hãy chọn câu lệnh kết hợp đúng nhất để tìm nhanh tài liệu PDF này trên mạng?",
+        options: ['A. hệ sinh thái Phong Nha typefile:pdf', 'B. hệ sinh thái Phong Nha filetype: pdf', 'C. hệ sinh thái Phong Nha filetype:pdf', 'D. hệ sinh thái Phong Nha .pdf'],
+        correct: 2,
+        explanation: 'Hồ sơ đã được tải! Cú pháp đúng là <code>filetype:</code> viết liền với đuôi tệp: <code>filetype:pdf</code>. Lựa chọn A sai tên lệnh, lựa chọn B dư khoảng trắng sau dấu hai chấm khiến lệnh bị vô hiệu.',
+        fragment: "KỲ QUAN"
+      },
+      {
+        id: 4, title: "THỬ THÁCH 4: XÁC THỰC SINH TRẮC HỌC",
+        situation: "Báo động! Bàn phím của máy tính điệp viên vừa bị vô hiệu hóa. Hệ thống yêu cầu cập nhật dự báo thời tiết tại Phong Nha thông qua lệnh điều khiển giọng nói.",
+        question: "Thao tác nào dưới đây là đúng nhất để kích hoạt và sử dụng tính năng tìm kiếm bằng giọng nói trên giao diện máy tính?",
+        options: ['A. Nháy chuột vào biểu tượng Máy ảnh trên thanh tìm kiếm và đọc.', 'B. Đọc to từ khóa vào màn hình mà không cần nháy chuột.', 'C. Nháy chuột vào biểu tượng Kính lúp và chờ hệ thống nhận diện.', 'D. Nháy chuột vào biểu tượng Micro, cho phép sử dụng micro, chờ biểu tượng đổi trạng thái rồi đọc.'],
+        correct: 3,
+        explanation: 'Xác thực thành công! Biểu tượng micro là chìa khóa <em>Voice Search</em>. Lựa chọn A là tìm kiếm bằng hình ảnh (Google Lens), lựa chọn B và C không kích hoạt được micro.',
+        fragment: "PHONG NHA"
+      },
+      {
+        id: 5, title: "THỬ THÁCH 5: CĂN CỨ AN TOÀN",
+        situation: "Cánh cửa cuối cùng! Thám tử cần thu thập thông tin quy định của Vườn Quốc gia. Trên mạng hiện có rất nhiều trang thông tin giả mạo.",
+        question: "Trong số các kết quả tìm kiếm, em nên ưu tiên click vào trang web có đuôi tên miền nào để đảm bảo độ tin cậy và tính chính thống của nhà nước/giáo dục?",
+        options: ['A. .com.vn hoặc .net.vn', 'B. .gov.vn hoặc .edu.vn', 'C. .info hoặc .org', 'D. .xyz hoặc .biz'],
+        correct: 1,
+        explanation: 'Giải mã hoàn tất! Để có thông tin chính thống và tính pháp lý cao nhất, hãy tìm đến "căn cứ an toàn": cơ quan chính phủ <code>.gov.vn</code> hoặc tổ chức giáo dục <code>.edu.vn</code>.',
+        fragment: "KẺ BÀNG!"
+      }
+    ];
 
-<!-- QUESTION MODAL -->
-<div class="modal-overlay" id="q-modal">
-  <div class="modal-box" id="q-box">
-    <div class="q-header">
-      <div class="q-title" id="q-title"></div>
-      <button class="q-close-btn" id="q-close">✕ Hủy</button>
-    </div>
-    <div class="situation-box">
-      <span class="sit-icon">⚠️</span>
-      <span id="q-situation"></span>
-    </div>
-    <div class="q-question" id="q-question"></div>
-    <div class="answers" id="q-answers"></div>
-    <div class="error-msg" id="q-error">⚠ Đáp án sai — Hãy thử lại!</div>
-  </div>
-</div>
+    /* STATE */
+    let unlocked = [false, false, false, false, false], activeIdx = null;
 
-<!-- EXPLANATION MODAL -->
-<div class="modal-overlay" id="exp-modal">
-  <div class="modal-box">
-    <div class="exp-box">
-      <div class="exp-icon">✅</div>
-      <div class="exp-title">Truy cập thành công!</div>
-      <div class="exp-body" id="exp-body"></div>
-      <div class="frag-badge">
-        <div class="frag-label">Mảnh ghép mật mã thu được</div>
-        <div class="frag-word" id="exp-frag"></div>
-      </div><br>
-      <button class="continue-btn" id="continue-btn">Tiếp tục nhiệm vụ ▶</button>
-    </div>
-  </div>
-</div>
+    /* DOM */
+    const bgLayer = document.getElementById('bg-layer');
+    const bgWash = document.getElementById('bg-wash');
+    const screenHome = document.getElementById('screen-home');
+    const screenVic = document.getElementById('screen-victory');
+    const cardsGrid = document.getElementById('cards-grid');
+    const fragsRow = document.getElementById('frags-row');
+    const qModal = document.getElementById('q-modal');
+    const qBox = document.getElementById('q-box');
+    const expModal = document.getElementById('exp-modal');
 
-<script>
-/* DATA */
-const CHALLENGES = [
-  {id:1,title:"THỬ THÁCH 1: BỨC THƯ TAY BÍ ẨN",
-   situation:"Mật mã đầu tiên được giấu trong nguyên tác câu thơ khuyết của bài 'Màu tím hoa sim'. Bọn tin tặc đã tung ra hàng ngàn lời bài hát remix và video chế tác để làm nhiễu thông tin.",
-   question:"Để bộ máy tìm kiếm chỉ hiển thị kết quả có chứa CHÍNH XÁC cụm từ 'Chiều hành quân qua những đồi hoa sim', em sẽ nhập từ khóa với cú pháp nào?",
-   options:['A. Chiều hành quân "qua những đồi" hoa sim','B. "Chiều hành quân qua những đồi hoa sim"','C. Chiều hành quân qua những đồi hoa sim ""','D. ""Chiều hành quân qua những đồi hoa sim""'],
-   correct:1,
-   explanation:'Mã khóa đã mở! Để tìm kiếm chính xác một cụm từ, điệp viên phải đặt toàn bộ cụm từ vào bên trong một cặp dấu ngoặc kép <code>""</code>. Các cách đặt ngoặc kép sai vị trí hoặc thừa dấu đều khiến thuật toán hiểu sai lệnh.',
-   fragment:"CHINH PHỤC"},
-  {id:2,title:"THỬ THÁCH 2: CẠM BẪY QUẢNG CÁO",
-   situation:"Thám tử đang tìm đường vào Hang Sơn Đoòng. Tuy nhiên, thuật toán chặn đường bằng hàng loạt trang web bán tour du lịch ảo và quảng cáo môi giới.",
-   question:"Để loại bỏ hoàn toàn các trang web chứa từ 'tour' và 'quảng cáo' khỏi kết quả tìm kiếm về Hang Sơn Đoòng, cú pháp nào sau đây là chuẩn xác nhất?",
-   options:['A. Hang Sơn Đoòng -tour -quảng cáo','B. Hang Sơn Đoòng - tour - quảng cáo','C. Hang Sơn Đoòng-tour-quảng cáo','D. Hang Sơn Đoòng "-tour" "-quảng cáo"'],
-   correct:0,
-   explanation:'Vượt bẫy thành công! Quy tắc sống còn: Phải có một dấu cách trước dấu trừ, và không có khoảng trắng sau dấu trừ — ví dụ: <code> -tour</code>.',
-   fragment:"THÀNH CÔNG"},
-  {id:3,title:"THỬ THÁCH 3: HỒ SƠ MẬT",
-   situation:"Cửa an ninh số 3 yêu cầu thám tử tải lên một tệp tài liệu nghiên cứu về hệ sinh thái Phong Nha. Tệp này bắt buộc ở định dạng PDF.",
-   question:"Em hãy chọn câu lệnh kết hợp đúng nhất để tìm nhanh tài liệu PDF này trên mạng?",
-   options:['A. hệ sinh thái Phong Nha typefile:pdf','B. hệ sinh thái Phong Nha filetype: pdf','C. hệ sinh thái Phong Nha filetype:pdf','D. hệ sinh thái Phong Nha .pdf'],
-   correct:2,
-   explanation:'Hồ sơ đã được tải! Cú pháp đúng là <code>filetype:</code> viết liền với đuôi tệp: <code>filetype:pdf</code>. Lựa chọn A sai tên lệnh, lựa chọn B dư khoảng trắng sau dấu hai chấm khiến lệnh bị vô hiệu.',
-   fragment:"KỲ QUAN"},
-  {id:4,title:"THỬ THÁCH 4: XÁC THỰC SINH TRẮC HỌC",
-   situation:"Báo động! Bàn phím của máy tính điệp viên vừa bị vô hiệu hóa. Hệ thống yêu cầu cập nhật dự báo thời tiết tại Phong Nha thông qua lệnh điều khiển giọng nói.",
-   question:"Thao tác nào dưới đây là đúng nhất để kích hoạt và sử dụng tính năng tìm kiếm bằng giọng nói trên giao diện máy tính?",
-   options:['A. Nháy chuột vào biểu tượng Máy ảnh trên thanh tìm kiếm và đọc.','B. Đọc to từ khóa vào màn hình mà không cần nháy chuột.','C. Nháy chuột vào biểu tượng Kính lúp và chờ hệ thống nhận diện.','D. Nháy chuột vào biểu tượng Micro, cho phép sử dụng micro, chờ biểu tượng đổi trạng thái rồi đọc.'],
-   correct:3,
-   explanation:'Xác thực thành công! Biểu tượng micro là chìa khóa <em>Voice Search</em>. Lựa chọn A là tìm kiếm bằng hình ảnh (Google Lens), lựa chọn B và C không kích hoạt được micro.',
-   fragment:"PHONG NHA"},
-  {id:5,title:"THỬ THÁCH 5: CĂN CỨ AN TOÀN",
-   situation:"Cánh cửa cuối cùng! Thám tử cần thu thập thông tin quy định của Vườn Quốc gia. Trên mạng hiện có rất nhiều trang thông tin giả mạo.",
-   question:"Trong số các kết quả tìm kiếm, em nên ưu tiên click vào trang web có đuôi tên miền nào để đảm bảo độ tin cậy và tính chính thống của nhà nước/giáo dục?",
-   options:['A. .com.vn hoặc .net.vn','B. .gov.vn hoặc .edu.vn','C. .info hoặc .org','D. .xyz hoặc .biz'],
-   correct:1,
-   explanation:'Giải mã hoàn tất! Để có thông tin chính thống và tính pháp lý cao nhất, hãy tìm đến "căn cứ an toàn": cơ quan chính phủ <code>.gov.vn</code> hoặc tổ chức giáo dục <code>.edu.vn</code>.',
-   fragment:"KẺ BÀNG!"}
-];
-
-/* STATE */
-let unlocked=[false,false,false,false,false], activeIdx=null;
-
-/* DOM */
-const bgLayer    = document.getElementById('bg-layer');
-const bgWash     = document.getElementById('bg-wash');
-const screenHome = document.getElementById('screen-home');
-const screenVic  = document.getElementById('screen-victory');
-const cardsGrid  = document.getElementById('cards-grid');
-const fragsRow   = document.getElementById('frags-row');
-const qModal     = document.getElementById('q-modal');
-const qBox       = document.getElementById('q-box');
-const expModal   = document.getElementById('exp-modal');
-
-/* RENDER CARDS */
-function renderCards(){
-  cardsGrid.innerHTML='';
-  CHALLENGES.forEach((ch,i)=>{
-    const done=unlocked[i];
-    const d=document.createElement('div');
-    d.className='c-card'+(done?' unlocked':'');
-    d.innerHTML=`
-      <div class="c-icon">${done?'🔓':'🔒'}</div>
+    /* RENDER CARDS */
+    function renderCards() {
+      cardsGrid.innerHTML = '';
+      CHALLENGES.forEach((ch, i) => {
+        const done = unlocked[i];
+        const d = document.createElement('div');
+        d.className = 'c-card' + (done ? ' unlocked' : '');
+        d.innerHTML = `
+      <div class="c-icon">${done ? '🔓' : '🔒'}</div>
       <div class="c-num">Thư mục · 0${ch.id}</div>
-      <div class="c-label">${done?'✓ Đã giải mã':'Nhiệm vụ '+ch.id}</div>
-      <div class="c-dot ${done?'green':'red'}"></div>`;
-    if(!done) d.addEventListener('click',()=>openQ(i));
-    cardsGrid.appendChild(d);
-  });
-}
+      <div class="c-label">${done ? '✓ Đã giải mã' : 'Nhiệm vụ ' + ch.id}</div>
+      <div class="c-dot ${done ? 'green' : 'red'}"></div>`;
+        if (!done) d.addEventListener('click', () => openQ(i));
+        cardsGrid.appendChild(d);
+      });
+    }
 
-/* RENDER FRAGMENTS */
-function renderFrags(){
-  fragsRow.innerHTML='';
-  CHALLENGES.forEach((ch,i)=>{
-    const w=document.createElement('div');
-    w.className='flip-wrap'+(unlocked[i]?' revealed':'');
-    w.id='flip-'+i;
-    w.innerHTML=`<div class="flip-inner">
+    /* RENDER FRAGMENTS */
+    function renderFrags() {
+      fragsRow.innerHTML = '';
+      CHALLENGES.forEach((ch, i) => {
+        const w = document.createElement('div');
+        w.className = 'flip-wrap' + (unlocked[i] ? ' revealed' : '');
+        w.id = 'flip-' + i;
+        w.innerHTML = `<div class="flip-inner">
       <div class="flip-front">???</div>
       <div class="flip-back">${ch.fragment}</div>
     </div>`;
-    fragsRow.appendChild(w);
-  });
-}
+        fragsRow.appendChild(w);
+      });
+    }
 
-/* MODAL HELPERS */
-function openM(el){ el.classList.add('open'); }
-function closeM(el,cb){ el.classList.remove('open'); if(cb) setTimeout(cb,330); }
+    /* MODAL HELPERS */
+    function openM(el) { el.classList.add('open'); }
+    function closeM(el, cb) { el.classList.remove('open'); if (cb) setTimeout(cb, 330); }
 
-/* QUESTION */
-function openQ(idx){
-  activeIdx=idx;
-  const ch=CHALLENGES[idx];
-  document.getElementById('q-title').textContent='▶ '+ch.title;
-  document.getElementById('q-situation').textContent=ch.situation;
-  document.getElementById('q-question').textContent=ch.question;
-  const grid=document.getElementById('q-answers');
-  grid.innerHTML='';
-  ch.options.forEach((opt,oi)=>{
-    const b=document.createElement('button');
-    b.className='ans-btn'; b.textContent=opt;
-    b.addEventListener('click',()=>onAnswer(oi,b));
-    grid.appendChild(b);
-  });
-  document.getElementById('q-error').classList.remove('show');
-  openM(qModal);
-}
+    /* QUESTION */
+    function openQ(idx) {
+      activeIdx = idx;
+      const ch = CHALLENGES[idx];
+      document.getElementById('q-title').textContent = '▶ ' + ch.title;
+      document.getElementById('q-situation').textContent = ch.situation;
+      document.getElementById('q-question').textContent = ch.question;
+      const grid = document.getElementById('q-answers');
+      grid.innerHTML = '';
+      ch.options.forEach((opt, oi) => {
+        const b = document.createElement('button');
+        b.className = 'ans-btn'; b.textContent = opt;
+        b.addEventListener('click', () => onAnswer(oi, b));
+        grid.appendChild(b);
+      });
+      document.getElementById('q-error').classList.remove('show');
+      openM(qModal);
+    }
 
-function onAnswer(oi,btn){
-  const ch=CHALLENGES[activeIdx];
-  if(oi===ch.correct){
-    btn.classList.add('correct');
-    document.querySelectorAll('.ans-btn').forEach(b=>{ if(b!==btn) b.disabled=true; });
-    setTimeout(()=>closeM(qModal,()=>openExp(activeIdx)),500);
-  } else {
-    btn.classList.add('wrong');
-    setTimeout(()=>btn.classList.remove('wrong'),460);
-    qBox.classList.remove('shake');
-    void qBox.offsetWidth;
-    qBox.classList.add('shake');
-    setTimeout(()=>qBox.classList.remove('shake'),500);
-    document.getElementById('q-error').classList.add('show');
-  }
-}
-document.getElementById('q-close').addEventListener('click',()=>closeM(qModal));
+    function onAnswer(oi, btn) {
+      const ch = CHALLENGES[activeIdx];
+      if (oi === ch.correct) {
+        btn.classList.add('correct');
+        document.querySelectorAll('.ans-btn').forEach(b => { if (b !== btn) b.disabled = true; });
+        setTimeout(() => closeM(qModal, () => openExp(activeIdx)), 500);
+      } else {
+        btn.classList.add('wrong');
+        setTimeout(() => btn.classList.remove('wrong'), 460);
+        qBox.classList.remove('shake');
+        void qBox.offsetWidth;
+        qBox.classList.add('shake');
+        setTimeout(() => qBox.classList.remove('shake'), 500);
+        document.getElementById('q-error').classList.add('show');
+      }
+    }
+    document.getElementById('q-close').addEventListener('click', () => closeM(qModal));
 
-/* EXPLANATION */
-function openExp(idx){
-  const ch=CHALLENGES[idx];
-  document.getElementById('exp-body').innerHTML=ch.explanation;
-  document.getElementById('exp-frag').textContent='"'+ch.fragment+'"';
-  unlocked[idx]=true;
-  renderCards();
-  setTimeout(()=>{ const f=document.getElementById('flip-'+idx); if(f) f.classList.add('revealed'); },220);
-  openM(expModal);
-}
-document.getElementById('continue-btn').addEventListener('click',()=>{
-  closeM(expModal,()=>{ if(unlocked.every(v=>v)) showVic(); });
-});
+    /* EXPLANATION */
+    function openExp(idx) {
+      const ch = CHALLENGES[idx];
+      document.getElementById('exp-body').innerHTML = ch.explanation;
+      document.getElementById('exp-frag').textContent = '"' + ch.fragment + '"';
+      unlocked[idx] = true;
+      renderCards();
+      setTimeout(() => { const f = document.getElementById('flip-' + idx); if (f) f.classList.add('revealed'); }, 220);
+      openM(expModal);
+    }
+    document.getElementById('continue-btn').addEventListener('click', () => {
+      closeM(expModal, () => { if (unlocked.every(v => v)) showVic(); });
+    });
 
-/* VICTORY */
-function showVic(){
-  bgLayer.classList.add('victory');
-  bgWash.classList.add('victory');
-  const vf=document.getElementById('v-frags');
-  vf.innerHTML=CHALLENGES.map(c=>`<div class="v-chip">${c.fragment}</div>`).join('');
-  screenHome.classList.remove('active');
-  screenVic.classList.add('active');
-  startConfetti();
-}
-document.getElementById('reset-btn').addEventListener('click',()=>{
-  stopConfetti();
-  unlocked=[false,false,false,false,false]; activeIdx=null;
-  bgLayer.classList.remove('victory');
-  bgWash.classList.remove('victory');
-  screenVic.classList.remove('active');
-  screenHome.classList.add('active');
-  renderCards(); renderFrags();
-});
+    /* VICTORY */
+    function showVic() {
+      bgLayer.classList.add('victory');
+      bgWash.classList.add('victory');
+      screenHome.classList.remove('active');
+      screenVic.classList.add('active');
+      startConfetti();
+    }
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      stopConfetti();
+      unlocked = [false, false, false, false, false]; activeIdx = null;
+      bgLayer.classList.remove('victory');
+      bgWash.classList.remove('victory');
+      screenVic.classList.remove('active');
+      screenHome.classList.add('active');
+      renderCards(); renderFrags();
+    });
 
-/* CONFETTI */
-const canvas=document.getElementById('confetti-canvas');
-const ctx=canvas.getContext('2d');
-let parts=[],raf=null,live=false;
-const COLS=['#f0c040','#14a899','#2a9d5c','#e63946','#c8920a','#7ed8cf','#0d7a6e','#fff'];
-function rsz(){ canvas.width=innerWidth; canvas.height=innerHeight; }
-addEventListener('resize',rsz); rsz();
-function mkP(initY){
-  return{x:Math.random()*canvas.width, y:initY!==undefined?Math.random()*canvas.height:-10,
-    w:Math.random()*9+4, h:Math.random()*5+3,
-    col:COLS[Math.floor(Math.random()*COLS.length)],
-    vx:(Math.random()-.5)*3, vy:Math.random()*3+2,
-    rot:Math.random()*360, rv:(Math.random()-.5)*7,
-    a:1, shape:Math.random()>.4?'rect':'circle'};
-}
-function startConfetti(){ live=true; parts=[]; for(let i=0;i<160;i++) parts.push(mkP(true)); loop(); }
-function stopConfetti(){ live=false; cancelAnimationFrame(raf); ctx.clearRect(0,0,canvas.width,canvas.height); parts=[]; }
-function loop(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  if(live && parts.length<240) for(let i=0;i<5;i++) parts.push(mkP());
-  parts.forEach((p,i)=>{
-    p.x+=p.vx; p.y+=p.vy; p.rot+=p.rv;
-    if(!live && p.y>canvas.height*.25) p.a-=.013;
-    if(p.y>canvas.height+20 && live){ parts[i]=mkP(); return; }
-    ctx.save();
-    ctx.globalAlpha=Math.max(0,p.a);
-    ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
-    ctx.fillStyle=p.col;
-    if(p.shape==='circle'){ ctx.beginPath(); ctx.arc(0,0,p.w/2,0,Math.PI*2); ctx.fill(); }
-    else ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
-    ctx.restore();
-  });
-  parts=parts.filter(p=>p.a>0&&p.y<canvas.height+50);
-  if(parts.length>0||live) raf=requestAnimationFrame(loop);
-}
+    /* CONFETTI */
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let parts = [], raf = null, live = false;
+    const COLS = ['#f0c040', '#14a899', '#2a9d5c', '#e63946', '#c8920a', '#7ed8cf', '#0d7a6e', '#fff'];
+    function rsz() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    addEventListener('resize', rsz); rsz();
+    function mkP(initY) {
+      return {
+        x: Math.random() * canvas.width, y: initY !== undefined ? Math.random() * canvas.height : -10,
+        w: Math.random() * 9 + 4, h: Math.random() * 5 + 3,
+        col: COLS[Math.floor(Math.random() * COLS.length)],
+        vx: (Math.random() - .5) * 3, vy: Math.random() * 3 + 2,
+        rot: Math.random() * 360, rv: (Math.random() - .5) * 7,
+        a: 1, shape: Math.random() > .4 ? 'rect' : 'circle'
+      };
+    }
+    function startConfetti() { live = true; parts = []; for (let i = 0; i < 160; i++) parts.push(mkP(true)); loop(); }
+    function stopConfetti() { live = false; cancelAnimationFrame(raf); ctx.clearRect(0, 0, canvas.width, canvas.height); parts = []; }
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (live && parts.length < 240) for (let i = 0; i < 5; i++) parts.push(mkP());
+      parts.forEach((p, i) => {
+        p.x += p.vx; p.y += p.vy; p.rot += p.rv;
+        if (!live && p.y > canvas.height * .25) p.a -= .013;
+        if (p.y > canvas.height + 20 && live) { parts[i] = mkP(); return; }
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.a);
+        ctx.translate(p.x, p.y); ctx.rotate(p.rot * Math.PI / 180);
+        ctx.fillStyle = p.col;
+        if (p.shape === 'circle') { ctx.beginPath(); ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2); ctx.fill(); }
+        else ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+      parts = parts.filter(p => p.a > 0 && p.y < canvas.height + 50);
+      if (parts.length > 0 || live) raf = requestAnimationFrame(loop);
+    }
 
-/* INIT */
-renderCards();
-renderFrags();
-</script>
+    /* INIT */
+    renderCards();
+    renderFrags();
+  </script>
 </body>
+
 </html>
