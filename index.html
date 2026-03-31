@@ -196,25 +196,28 @@
 
     /* ── CARDS ── */
     .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 16px;
       margin-bottom: 28px;
     }
 
+
     @media(max-width:620px) {
-      .cards-grid {
-        grid-template-columns: repeat(2, 1fr)
+      .c-card {
+        flex: 0 0 calc(50% - 8px);
       }
     }
 
     @media(max-width:380px) {
-      .cards-grid {
-        grid-template-columns: 1fr
+      .c-card {
+        flex: 0 0 100%;
       }
     }
 
     .c-card {
+      flex: 0 0 calc(33.333% - 11px);
       background: var(--white);
       border: 1.5px solid var(--teal-100);
       border-radius: 18px;
