@@ -716,13 +716,24 @@
 
     /* ── VICTORY ── */
     #screen-victory {
-      padding: 16px 16px 24px;
-      justify-content: flex-start;
+      padding: 0;
+      justify-content: center;
       align-items: center;
-      min-height: 100vh;
       height: 100vh;
-      overflow-y: auto;
+      width: 100vw;
+      overflow: hidden;
       box-sizing: border-box;
+    }
+
+    /* Wrapper co giãn để vừa màn hình */
+    .v-scaler {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transform-origin: top center;
+      width: 760px;
+      padding: 16px 0 20px;
     }
 
     /* Banner câu hoàn chỉnh */
@@ -885,72 +896,63 @@
 
     /* Body below photo */
     .cert-body {
-      background: var(--gold-100);
-      padding: 48px 40px 28px;
+      background: linear-gradient(160deg, #1a3a3a 0%, #0d5c52 100%);
+      padding: 44px 40px 24px;
       text-align: center;
-    }
-
-    @media(max-width:520px) {
-      .cert-body {
-        padding: 44px 18px 24px
-      }
-
-      .cert-photo {
-        height: 140px
-      }
     }
 
     .cert-eyebrow {
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 4px;
-      color: var(--gold-500);
+      color: var(--teal-300);
       text-transform: uppercase;
       margin-bottom: 10px;
     }
 
     .cert-h1 {
       font-family: 'Lexend', sans-serif;
-      font-size: clamp(24px, 5vw, 40px);
+      font-size: clamp(22px, 4vw, 34px);
       font-weight: 800;
-      color: var(--gold-700);
+      color: var(--white);
       line-height: 1.15;
       margin-bottom: 8px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, .3);
     }
 
     .cert-h2 {
       font-family: 'Be Vietnam Pro', sans-serif;
-      font-size: clamp(15px, 2.8vw, 22px);
+      font-size: clamp(13px, 2.2vw, 18px);
       font-weight: 700;
-      color: var(--teal-700);
+      color: var(--teal-300);
       letter-spacing: 1px;
-      margin-bottom: 22px;
+      margin-bottom: 16px;
     }
 
     .cert-divider {
       height: 1.5px;
-      margin: 20px auto;
+      margin: 14px auto;
       width: 80%;
-      background: linear-gradient(90deg, transparent, var(--gold-300), transparent);
+      background: linear-gradient(90deg, transparent, rgba(240, 192, 64, .5), transparent);
     }
 
     .cert-desc {
-      font-size: 14px;
-      line-height: 1.75;
-      color: var(--ink-mid);
-      margin-bottom: 22px;
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, .82);
+      margin-bottom: 16px;
     }
 
     .cert-skills {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 8px;
       text-align: left;
-      background: rgba(255, 255, 255, .72);
-      border: 1.5px solid var(--gold-300);
+      background: rgba(255, 255, 255, .09);
+      border: 1.5px solid rgba(126, 216, 207, .35);
       border-radius: 12px;
-      padding: 18px 20px;
-      margin-bottom: 24px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
     }
 
     @media(max-width:480px) {
@@ -963,9 +965,9 @@
       display: flex;
       align-items: center;
       gap: 9px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      color: var(--ink-mid);
+      color: rgba(255, 255, 255, .78);
     }
 
     .ck {
@@ -974,7 +976,7 @@
     }
 
     .skill-row strong {
-      color: var(--teal-700);
+      color: var(--teal-300);
       font-weight: 700;
     }
 
@@ -983,38 +985,37 @@
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 3px;
-      color: var(--teal-700);
+      color: var(--teal-300);
       text-transform: uppercase;
-      background: rgba(20, 168, 153, .1);
-      border: 1.5px solid var(--teal-300);
+      background: rgba(20, 168, 153, .12);
+      border: 1.5px solid var(--teal-500);
       border-radius: 8px;
-      padding: 9px 22px;
+      padding: 8px 20px;
     }
 
     .reset-btn {
-      margin-top: 28px;
+      margin-top: 0;
       display: flex;
       align-items: center;
       gap: 10px;
-      background: var(--white);
+      background: rgba(255, 255, 255, .15);
       border: 1.5px solid var(--teal-300);
       border-radius: 12px;
-      padding: 13px 32px;
+      padding: 11px 28px;
       font-family: 'Be Vietnam Pro', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--teal-700);
+      color: var(--white);
       cursor: pointer;
       letter-spacing: .5px;
       transition: all .3s;
-      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(4px);
     }
 
     .reset-btn:hover {
-      background: var(--teal-50);
-      border-color: var(--teal-500);
+      background: rgba(255, 255, 255, .25);
+      border-color: var(--teal-300);
       transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
     }
 
     /* ── CONFETTI ── */
@@ -1059,49 +1060,51 @@
 
     <!-- VICTORY -->
     <div id="screen-victory" class="screen">
-      <div class="v-banner">
-        <div class="v-banner-label">🏆 Mật mã hoàn chỉnh</div>
-        <div class="v-banner-phrase" id="v-frags">CHINH PHỤC THÀNH CÔNG KỲ QUAN PHONG NHA KẺ BÀNG!</div>
-      </div>
+      <div class="v-scaler" id="v-scaler">
+        <div class="v-banner">
+          <div class="v-banner-label">🏆 Mật mã hoàn chỉnh</div>
+          <div class="v-banner-phrase" id="v-frags">CHINH PHỤC THÀNH CÔNG KỲ QUAN PHONG NHA KẺ BÀNG!</div>
+        </div>
 
-      <div class="cert">
-        <!-- Corner ornaments -->
-        <div class="cert-orn cert-orn-tl"></div>
-        <div class="cert-orn cert-orn-tr"></div>
-        <div class="cert-orn cert-orn-bl"></div>
-        <div class="cert-orn cert-orn-br"></div>
+        <div class="cert">
+          <!-- Corner ornaments -->
+          <div class="cert-orn cert-orn-tl"></div>
+          <div class="cert-orn cert-orn-tr"></div>
+          <div class="cert-orn cert-orn-bl"></div>
+          <div class="cert-orn cert-orn-br"></div>
 
-        <!-- Photo band with medal -->
-        <div class="cert-photo">
-          <img src="phongnha.png" alt="Phong Nha Kẻ Bàng">
-          <div class="cert-medal-wrap">
-            <div class="cert-medal-circle">🏆</div>
+          <!-- Photo band with medal -->
+          <div class="cert-photo">
+            <img src="phongnha.png" alt="Phong Nha Kẻ Bàng">
+            <div class="cert-medal-wrap">
+              <div class="cert-medal-circle">🏆</div>
+            </div>
+          </div>
+
+          <!-- Certificate body -->
+          <div class="cert-body">
+            <p class="cert-eyebrow">Hoàn tất nhiệm vụ · Điệp vụ Phong Nha</p>
+            <h2 class="cert-h1">Giấy Chứng Nhận</h2>
+            <p class="cert-h2">Người Dẫn Tour Chuyên Nghiệp</p>
+            <div class="cert-divider"></div>
+            <p class="cert-desc">
+              Chúc mừng! Bạn đã xuất sắc hoàn thành Điệp Vụ Phong Nha – Kẻ Bàng
+              và nắm vững đầy đủ các kỹ năng tìm kiếm thông tin trên mạng.
+            </p>
+            <div class="cert-skills">
+              <div class="skill-row"><span class="ck">✔</span>Tìm chính xác với <strong>&nbsp;""</strong></div>
+              <div class="skill-row"><span class="ck">✔</span>Loại từ khóa với <strong>&nbsp;-</strong></div>
+              <div class="skill-row"><span class="ck">✔</span>Lọc định dạng <strong>&nbsp;filetype:</strong></div>
+              <div class="skill-row"><span class="ck">✔</span>Tìm bằng <strong>&nbsp;Giọng nói</strong></div>
+              <div class="skill-row"><span class="ck">✔</span>Nhận diện <strong>&nbsp;.gov.vn / .edu.vn</strong></div>
+            </div>
+            <div class="cert-divider"></div>
+            <span class="cert-stamp">◆ Vườn Quốc Gia Phong Nha – Kẻ Bàng ◆</span>
           </div>
         </div>
 
-        <!-- Certificate body -->
-        <div class="cert-body">
-          <p class="cert-eyebrow">Hoàn tất nhiệm vụ · Điệp vụ Phong Nha</p>
-          <h2 class="cert-h1">Giấy Chứng Nhận</h2>
-          <p class="cert-h2">Người Dẫn Tour Chuyên Nghiệp</p>
-          <div class="cert-divider"></div>
-          <p class="cert-desc">
-            Chúc mừng! Bạn đã xuất sắc hoàn thành Điệp Vụ Phong Nha – Kẻ Bàng
-            và nắm vững đầy đủ các kỹ năng tìm kiếm thông tin trên mạng.
-          </p>
-          <div class="cert-skills">
-            <div class="skill-row"><span class="ck">✔</span>Tìm chính xác với <strong>&nbsp;""</strong></div>
-            <div class="skill-row"><span class="ck">✔</span>Loại từ khóa với <strong>&nbsp;-</strong></div>
-            <div class="skill-row"><span class="ck">✔</span>Lọc định dạng <strong>&nbsp;filetype:</strong></div>
-            <div class="skill-row"><span class="ck">✔</span>Tìm bằng <strong>&nbsp;Giọng nói</strong></div>
-            <div class="skill-row"><span class="ck">✔</span>Nhận diện <strong>&nbsp;.gov.vn / .edu.vn</strong></div>
-          </div>
-          <div class="cert-divider"></div>
-          <span class="cert-stamp">◆ Vườn Quốc Gia Phong Nha – Kẻ Bàng ◆</span>
-        </div>
-      </div>
-
-      <button class="reset-btn" id="reset-btn">↻ &nbsp;Nhận nhiệm vụ mới</button>
+        <button class="reset-btn" id="reset-btn">↻ &nbsp;Nhận nhiệm vụ mới</button>
+      </div><!-- end v-scaler -->
     </div>
 
   </div>
@@ -1261,10 +1264,12 @@
     function onAnswer(oi, btn) {
       const ch = CHALLENGES[activeIdx];
       if (oi === ch.correct) {
+        playCorrect();
         btn.classList.add('correct');
         document.querySelectorAll('.ans-btn').forEach(b => { if (b !== btn) b.disabled = true; });
         setTimeout(() => closeM(qModal, () => openExp(activeIdx)), 500);
       } else {
+        playWrong();
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 460);
         qBox.classList.remove('shake');
@@ -1296,8 +1301,25 @@
       bgWash.classList.add('victory');
       screenHome.classList.remove('active');
       screenVic.classList.add('active');
+      setTimeout(() => { scaleVic(); playWin(); }, 50);
       startConfetti();
     }
+
+    /* Scale v-scaler để vừa 100vh */
+    function scaleVic() {
+      const el = document.getElementById('v-scaler');
+      if (!el) return;
+      const availH = window.innerHeight;
+      const availW = window.innerWidth;
+      const contentH = el.scrollHeight;
+      const contentW = el.scrollWidth;
+      const scaleH = availH / contentH;
+      const scaleW = availW / contentW;
+      const scale = Math.min(scaleH, scaleW, 1); // never upscale
+      el.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('resize', () => { if (screenVic.classList.contains('active')) scaleVic(); });
+
     document.getElementById('reset-btn').addEventListener('click', () => {
       stopConfetti();
       unlocked = [false, false, false, false, false]; activeIdx = null;
@@ -1305,8 +1327,42 @@
       bgWash.classList.remove('victory');
       screenVic.classList.remove('active');
       screenHome.classList.add('active');
+      const el = document.getElementById('v-scaler');
+      if (el) el.style.transform = '';
       renderCards(); renderFrags();
     });
+
+    /* WEB AUDIO — âm thanh bằng oscillator (không cần file ngoài) */
+    let audioCtx = null;
+    function getCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+    function playTone(freqs, durs, type = 'sine', vol = 0.22) {
+      const ctx = getCtx();
+      freqs.forEach((freq, i) => {
+        const t0 = ctx.currentTime + freqs.slice(0, i).reduce((a, _, j) => a + durs[j], 0);
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, t0);
+        gain.gain.setValueAtTime(0, t0);
+        gain.gain.linearRampToValueAtTime(vol, t0 + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, t0 + durs[i] - 0.01);
+        osc.start(t0); osc.stop(t0 + durs[i]);
+      });
+    }
+    function playCorrect() { playTone([523, 659, 784], [0.12, 0.12, 0.22], 'sine', 0.25); }
+    function playWrong() { playTone([220, 185], [0.15, 0.28], 'sawtooth', 0.18); }
+    function playWin() {
+      // fanfare: do-mi-sol-do-mi-sol + trill high
+      playTone(
+        [523, 659, 784, 1047, 1319, 1047, 784, 1047],
+        [0.12, 0.12, 0.12, 0.18, 0.18, 0.12, 0.12, 0.32],
+        'sine', 0.28
+      );
+    }
 
     /* CONFETTI */
     const canvas = document.getElementById('confetti-canvas');
